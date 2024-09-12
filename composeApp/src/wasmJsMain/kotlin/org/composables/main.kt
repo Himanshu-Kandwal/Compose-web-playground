@@ -6,15 +6,15 @@ import kotlinx.browser.document
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    /*ComposeViewport(document.body!!) {
-        App()
-    }*/
 
-   /* ComposeViewport(viewportContainerId = "composeApplicationSample") {
-        AppTwo()
-    }*/
+    val GITHUB_HOSTING_BASE_URL = "https://himanshu-kandwal.github.io/Compose-web-playground"
 
-    val currentPath = document.location?.pathname ?: "/"
+    var currentPath = document.location?.pathname ?: "/"
+
+    //for github check, if project is running in github it will have different url than localhost
+    if(currentPath.contains(GITHUB_HOSTING_BASE_URL))
+    currentPath = currentPath.removePrefix(GITHUB_HOSTING_BASE_URL) //remove extra prefix added by github
+
     // Log the current path to the console
     println("Current path: $currentPath")
 
@@ -23,13 +23,10 @@ fun main() {
         "/" -> ComposeViewport(viewportContainerId = "composeApplicationSample") {
             App()
         }
+
         "/two.html" -> ComposeViewport(viewportContainerId = "composeApplicationSample") {
             AppTwo()
         }
     }
 
-
-    /* ComposeViewport(viewportContainerId = "composeApplicationSampleTwo") {
-         App()
-     }*/
 }
